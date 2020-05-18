@@ -63,7 +63,7 @@ const DTimeForm = ({ classes, ...props }) => {
         if (validate()) {
             const onSuccess = () => {
                 resetForm()
-                addToast("Submitted successfully", { appearance: 'success' })
+                addToast("Salvo", { appearance: 'success' })
             }
             if (props.currentId === 0)
                 props.createDTime(values, onSuccess)
@@ -106,14 +106,14 @@ const DTimeForm = ({ classes, ...props }) => {
                             type="submit"
                             className={classes.smMargin}
                         >
-                            Submit
+                            Salvar
                         </Button>
                         <Button
                             variant="contained"
                             className={classes.smMargin}
                             onClick={resetForm}
                         >
-                            Reset
+                            Limpar
                         </Button>
                     </div>
                 </Grid>

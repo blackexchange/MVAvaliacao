@@ -10,12 +10,16 @@ import DTimes from './components/DTimes';
 
 import { Container } from "@material-ui/core";
 import { ToastProvider } from "react-toast-notifications";
+import { dJogador } from './reducers/dJogador';
 
 function App() {
   return (
     <Provider store={store}>
       <ToastProvider autoDismiss={true}>
         <Container maxWidth="lg">
+        <DTimes />
+        <DJogadores/>
+      
         <DPartidas />
        
          

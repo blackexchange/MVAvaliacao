@@ -39,30 +39,36 @@ const DPartidas = ({ classes, ...props }) => {
     }
 
     const onPontoA = id => {
+    
             setCurrentId(id);
-            var timeA = props.dPartidaList.placarA;
-            props.updatePartida(id,()=>addToast("Ponto para time A", { appearance: 'info' }))
+            props.dPartidaList[0].onPontoA=20;
+           
+            //var timeA = props.dPartidaList.placarA;
+            props.updatePartida(id,()=>addToast("Ponto para time 1", { appearance: 'info' }))
     }
     const onPontoB = id => {
+        setCurrentId(id);
       
-            props.updatePartida(id,()=>addToast("Ponto para time B", { appearance: 'info' }))
+          //  props.updatePartida(id,()=>addToast("Ponto para time 2", { appearance: 'info' }))
     }
 
     const onFinalizar = id => {
         setCurrentId(id);
-        var timeA = props.dPartidaList.placarA;
-        var timeB = props.dPartidaList.placarB;
-        window.confirm(DPartidas.onPontoA);
-        /*
+
+
+       
+        var timeA = parseInt(props.dPartidaList[0].placarA);
+        var timeB = parseInt(props.dPartidaList[0].placarB);
+
+        
+   
         if (timeA > timeB)
-            window.confirm('Time A é o Vencedor!')
+            addToast("O Time 1 é o vencedor!", { appearance: 'success' });
         else if (timeA < timeB)
-            window.confirm('Time B é o Vencedor!')
+            addToast("O Time 2 é o vencedor!", { appearance: 'warning' });
         else
-            window.confirm('EMPATE!')
-          //  props.updatePartida(id,()=>addToast("Deleted successfully", { appearance: 'info' }))
-          */
-    }
+            addToast("Deu Empate!!", { appearance: 'info' });
+           }
     return (
         <Paper className={classes.paper} elevation={3} id="dPartidas">
             <h2>Torneios</h2>
@@ -76,12 +82,12 @@ const DPartidas = ({ classes, ...props }) => {
                             <TableHead className={classes.root}>
                                 <TableRow>
                                     
-                                    <TableCell>Time A</TableCell>
-                                    <TableCell></TableCell>
+                                    <TableCell>ID Time 1</TableCell>
+                                    <TableCell>Placar</TableCell>
                                     <TableCell>X</TableCell>
-                                    <TableCell></TableCell>
-                                    <TableCell>Time B</TableCell>
-                                    <TableCell colSpan="5"></TableCell>
+                                    <TableCell>Placar</TableCell>
+                                    <TableCell>ID Time 2</TableCell>
+                                    <TableCell colSpan="2"></TableCell>
                                 
                                    
                                 </TableRow>
@@ -101,14 +107,11 @@ const DPartidas = ({ classes, ...props }) => {
                                                 <ButtonGroup variant="text">
                                                     <Button><EditIcon color="primary"
                                                         onClick={() => { setCurrentId(record.id) }} /></Button>
-                                                    <Button><DeleteIcon color="secondary"
-                                                        onClick={() => onDelete(record.id)} /></Button>
-                                                    <Button><SportsKabaddi
-                                                        onClick={() => onPontoA(record.id)} /></Button>
+                                                    
                                                     <Button><PanTool color="secondary"
+                                                    titleAccess="Finalizar"
                                                         onClick={() => onFinalizar(record.id)} /></Button>
-                                                     <Button><SportsKabaddi  color="primary"
-                                                        onClick={() => onPontoB(record.id)} /></Button>                                                    
+                                                                                                    
                                                 </ButtonGroup>
                                             </TableCell>
                                         </TableRow>)

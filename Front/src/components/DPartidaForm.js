@@ -6,6 +6,28 @@ import * as actions from "../actions/dPartida";
 import * as actionsTime  from "../actions/dTime";
 import { useToasts } from "react-toast-notifications";
 
+import styled from "styled-components";
+
+const MeuBotao = styled.button`
+    background: #0099FF;
+    border: 2px solid #0099FF;
+    border-radius: 3px;
+    color: #FDFDFD;
+    font-size: 1.2rem;
+    margin: 1rem;
+    padding: 1rem 1.5rem;
+`;
+
+const Salvar = styled.button`
+    background: #0022FF;
+    border: 2px solid #0099FF;
+    border-radius: 3px;
+    color: #FDFDFD;
+    font-size: 1.2rem;
+    margin: 1rem;
+    padding: 1rem 1.5rem;
+`;
+
 const styles = theme => ({
     root: {
         '& .MuiTextField-root': {
@@ -67,6 +89,8 @@ const DPartidaForm = ({ classes, ...props }) => {
         resetForm
     } = useForm(initialFieldValues, validate, props.setCurrentId)
 
+   
+
     //material-ui select
     const inputLabel = React.useRef(null);
     const [labelWidth, setLabelWidth] = React.useState(0);
@@ -79,7 +103,7 @@ const DPartidaForm = ({ classes, ...props }) => {
         if (validate()) {
             const onSuccess = () => {
                 resetForm()
-                addToast("Submitted successfully", { appearance: 'success' })
+                addToast("Partida iniciada!", { appearance: 'success' })
             }
             if (props.currentId === 0)
                 props.createDPartida(values, onSuccess)
@@ -112,6 +136,7 @@ const DPartidaForm = ({ classes, ...props }) => {
                             value={values.equipeAId}
                             onChange={handleInputChange}
                             labelWidth={labelWidth}
+                            key="1"
                         >
                             <MenuItem value="">Escolha o Primeiro Time </MenuItem>
                           
@@ -139,6 +164,7 @@ const DPartidaForm = ({ classes, ...props }) => {
                             value={values.equipeBId}
                             onChange={handleInputChange}
                             labelWidth={labelWidth}
+                            key="2"
                         >
                              <MenuItem value="">Escolha o Segundo Time </MenuItem>
                             
@@ -157,7 +183,7 @@ const DPartidaForm = ({ classes, ...props }) => {
                     <TextField
                         name="placarA"
                         variant="outlined"
-                        label="Placar A"
+                        label="Placar Time 1"
                         value={values.placarA}
                         onChange={handleInputChange}
                         {...(errors.placarA && { error: true, helperText: errors.placarA })}
@@ -165,7 +191,7 @@ const DPartidaForm = ({ classes, ...props }) => {
                     <TextField
                         name="placarB"
                         variant="outlined"
-                        label="Placar B"
+                        label="Placar TIme 2"
                         value={values.placarB}
                         onChange={handleInputChange}
                         {...(errors.placarB && { error: true, helperText: errors.placarB })}
@@ -175,21 +201,10 @@ const DPartidaForm = ({ classes, ...props }) => {
 
                     
                     <div>
-                        <Button
-                            variant="contained"
-                            color="primary"
-                            type="submit"
-                            className={classes.smMargin}
-                        >
-                            Salvar
-                        </Button>
-                        <Button
-                            variant="contained"
-                            className={classes.smMargin}
-                            onClick={resetForm}
-                        >
-                            Reset
-                        </Button>
+                        <MeuBotao type="submit">Iniciar</MeuBotao>
+                        <Salvar  type="submit">Atualizar</Salvar>
+                       
+                    
                     </div>
                 </Grid>
             </Grid>
@@ -202,6 +217,7 @@ const mapStateToProps = state => ({
     dPartidaList: state.dPartida.list,
     dTimeList: state.dTime.list,
     dTimeListB: state.dTime.list
+  
 })
 
 const mapActionToProps = {

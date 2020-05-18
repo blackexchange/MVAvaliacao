@@ -76,7 +76,7 @@ const DJogadorForm = ({ classes, ...props }) => {
         if (validate()) {
             const onSuccess = () => {
                 resetForm()
-                addToast("Submitted successfully", { appearance: 'success' })
+                addToast("Salvo", { appearance: 'success' })
             }
             if (props.currentId === 0)
                 props.createDJogador(values, onSuccess)
@@ -143,14 +143,14 @@ const DJogadorForm = ({ classes, ...props }) => {
                             type="submit"
                             className={classes.smMargin}
                         >
-                            Submit
+                            Enviar
                         </Button>
                         <Button
                             variant="contained"
                             className={classes.smMargin}
                             onClick={resetForm}
                         >
-                            Reset
+                            Limpar
                         </Button>
                     </div>
                 </Grid>
