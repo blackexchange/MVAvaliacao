@@ -1,6 +1,5 @@
-###Backend
+### MV Sistemas - Desenvolvedor FullStack
 
-MV Sistemas - Desenvolvedor FullStack
 
 O intuito é desenvolver um sistema para controlar um torneio, onde deverá ser possível cadastrar os times e seus respectivos jogadores (CRUD).
 
@@ -11,3 +10,9 @@ Ao iniciar um jogo, deverá ser possível selecionar os dois times que irão due
 O Back-end deve ser desenvolvida uma API, com serviços REST, utilizando .Net Core. Desejável utilizar as práticas do DDD para organização dos projetos.
 
 O Front-end deve ser desenvolvido com React/Redux. Desejável utilizar a biblioteca Styled Component e Bootstrap.
+
+
+### Backend
+
+Obs.: Regra de limitação de 5 membros por equipe implementei no backend.
+
