@@ -22,13 +22,10 @@ namespace WebAPI.Controllers
 
         // GET: api/Jogador
         [HttpGet]
-        public async Task<ActionResult<Jogador[]>> GetJogadores()
+        public async Task<ActionResult<IEnumerable<Jogador>>> GetJogadores()
         {
-            IQueryable<Jogador> query = _context.Jogadores
-                .Include(h => h.Equipe);
-            query = query.AsNoTracking().OrderBy(h => h.Id);
-            
-            return await query.ToArrayAsync();
+
+            return await _context.Jogadores.ToListAsync();
         }
 
         // GET: api/Jogador/5
@@ -83,10 +80,22 @@ namespace WebAPI.Controllers
         [HttpPost]
         public async Task<ActionResult<Jogador>> PostJogador(Jogador jogador)
         {
-            _context.Jogadores.Add(jogador);
-            await _context.SaveChangesAsync();
+           var idEquipe = (int) jogador.EquipeId;
 
-            return CreatedAtAction("GetJogador", new { id = jogador.Id }, jogador);
+            IQueryable<Jogador> query = _context.Jogadores
+              .Where(h => h.EquipeId == idEquipe);
+            if (query.Count() < 5)
+            {
+                _context.Jogadores.Add(jogador);
+                await _context.SaveChangesAsync();
+
+                return CreatedAtAction("GetJogador", new { id = jogador.Id }, jogador);
+            }
+            else
+            {
+                return BadRequest("Quantidade de jogadores limitadas a 5.");
+
+            }
         }
 
         // DELETE: api/Jogador/5

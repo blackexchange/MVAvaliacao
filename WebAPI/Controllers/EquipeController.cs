@@ -24,11 +24,12 @@ namespace WebAPI.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Equipe>>> GetEquipes()
         {
-            IQueryable<Equipe> query = _context.Equipes
+            /*IQueryable<Equipe> query = _context.Equipes
                .Include(h => h.Jogadors);
             query = query.AsNoTracking().OrderBy(h => h.Id);
 
-            return await query.ToListAsync();
+            return await query.ToListAsync();*/
+            return await _context.Equipes.ToListAsync();
         }
 
         // GET: api/Equipe/5

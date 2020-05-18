@@ -79,10 +79,30 @@ namespace WebAPI.Controllers
         [HttpPost]
         public async Task<ActionResult<Torneio>> PostTorneio(Torneio torneio)
         {
-            _context.Torneios.Add(torneio);
-            await _context.SaveChangesAsync();
+            var idA = ( int )torneio.EquipeAId;
+            var idB  = (int ) torneio.EquipeBId;
 
-            return CreatedAtAction("GetTorneio", new { id = torneio.Id }, torneio);
+            IQueryable<Jogador> query = _context.Jogadores
+               .Where(h => h.EquipeId == idA);
+
+            IQueryable<Jogador> queryB = _context.Jogadores
+              .Where(h => h.EquipeId == idB);
+
+            if (query.Count() == queryB.Count())
+                {
+                _context.Torneios.Add(torneio);
+                await _context.SaveChangesAsync();
+
+                return CreatedAtAction("GetTorneio", new { id = torneio.Id }, torneio);
+
+            }
+            else
+            {
+                return BadRequest("As equipes precisam conter quantidade de membros iguais.");
+
+
+            }
+
         }
 
         // DELETE: api/Torneio/5
