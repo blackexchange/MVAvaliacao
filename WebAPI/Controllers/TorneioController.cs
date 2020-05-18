@@ -90,7 +90,7 @@ namespace WebAPI.Controllers
             IQueryable<Jogador> queryB = _context.Jogadores
               .Where(h => h.EquipeId == idB);
 
-            if (query.Count() == queryB.Count())
+            if ((query.Count() == queryB.Count()) && (query.Count()>=5 && queryB.Count()>=5) )
                 {
                 _context.Torneios.Add(torneio);
                 await _context.SaveChangesAsync();
