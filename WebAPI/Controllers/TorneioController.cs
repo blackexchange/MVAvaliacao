@@ -81,6 +81,8 @@ namespace WebAPI.Controllers
         {
             var idA = ( int )torneio.EquipeAId;
             var idB  = (int ) torneio.EquipeBId;
+            torneio.EquipeAId = idA;
+            torneio.EquipeBId = idB;
 
             IQueryable<Jogador> query = _context.Jogadores
                .Where(h => h.EquipeId == idA);
